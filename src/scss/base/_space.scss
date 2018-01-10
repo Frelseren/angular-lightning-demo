@@ -1,0 +1,29 @@
+$xs: em(10);
+$sm: em(20);
+$md: em(40);
+$lg: em(60);
+
+@include utilsGenerator((
+  classes:(
+    'ma': (margin),
+    'mb': (margin-bottom),
+    'ml': (margin-left),
+    'mr': (margin-right),
+    'mt': (margin-top),
+    'mh': (margin-left, margin-right),
+    'mv': (margin-top, margin-bottom),
+    'pa': (padding),
+    'pb': (padding-bottom),
+    'pl': (padding-left),
+    'pr': (padding-right),
+    'pt': (padding-top),
+    'ph': (padding-left, padding-right),
+    'pv': (padding-top, padding-bottom)
+  ),
+  values: (
+    'xs': $xs,
+    'sm': $sm,
+    'md': $md,
+    'lg': $lg
+  ),
+));

@@ -1,0 +1,26 @@
+@mixin responsivize($selector, $responsive: true, $suffix:''){
+  #{$selector}#{$suffix} {
+    @content;
+  }
+}
+
+@mixin utilsGenerator($settings){
+  $settings: map-merge((responsive: false, seperator: "-", prefix: '.u-', suffix: '', important:true), $settings);
+  @each $name, $props in map-get($settings, classes) {
+    @each $valueName, $value in map-get($settings, values) {
+      $seperator: map-get($settings, seperator);
+      @if $valueName == ''{
+        $seperator: ''
+      }
+      @include responsivize(#{map-get($settings, prefix)}#{$name}#{$seperator}#{$valueName}, $responsive:map-get($settings, responsive), $suffix:map-get($settings, suffix)) {
+        @each $prop in $props {
+          @if(map-get($settings, important)){
+            #{$prop}: $value !important;
+          } @else{
+            #{$prop}: $value;
+          }
+        }
+      }
+    }
+  }
+}

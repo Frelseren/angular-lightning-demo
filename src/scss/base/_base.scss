@@ -1,0 +1,16 @@
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  font-family: 'Roboto', 'Open Sans', 'Helvetica', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  background-color: $grey-light;
+  font-size: 0.875rem;
+
+  @include respond-to('md') {
+    font-size: 1rem;
+  }
+}

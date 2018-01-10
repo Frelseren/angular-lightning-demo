@@ -1,0 +1,38 @@
+/// Breakpoints map, gathering all responsive breakpoints of the application
+/// @access private
+/// @type Map
+/// @prop {String} key - breakpoint name
+/// @prop {String} value - @media value mapped for the key 
+$breakpoints: (
+  // Small devices (landscape phones, 34em and up)
+  'sm': '(min-width: 34em)',
+  // Medium devices (tablets, 48em and up)
+  'md': '(min-width: 48em)',
+  // Large devices (desktops, 62em and up)
+  'lg': '(min-width: 62em)',
+  // Extra large devices (large desktops, 75em and up)
+  'xl': '(min-width: 75em)',
+);
+
+/// Responsive breakpoints manager
+/// @access public
+/// @param {String} $breakpoint - Breakpoint
+/// @requires $breakpoints
+@mixin respond-to($breakpoint) {
+  $raw-query: map-get($breakpoints, $breakpoint);
+
+  @if $raw-query {
+    $query: if(
+      type-of($raw-query) == 'string',
+      unquote($raw-query),
+      inspect($raw-query)
+    );
+
+    @media #{$query} {
+      @content;
+    }
+  } @else {
+    @error 'No value for `#{$breakpoint}`. '
+         + 'Please make sure it is defined in `#{$breakpoints}` map.';
+  }
+}
