@@ -1,6 +1,6 @@
 <apex:page standardStylesheets="false" sidebar="false" showHeader="false" 
   applyBodyTag="false" applyHtmlTag="false" docType="html-5.0"
-  controller="DASubmissionController">
+  controller="AngularPOC">
   <html>
     <head>
       <meta charset="utf-8" />

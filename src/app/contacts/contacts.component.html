@@ -1,3 +1,8 @@
 <h1 class="u-mb-xs">
   Contacts
 </h1>
+<div>
+  <a class="row" *ngFor="let contact of contacts"
+    routerLink="{{ '/contact/' + contact.Id}}"
+  >{{ contact.Name }}</a>
+</div>
