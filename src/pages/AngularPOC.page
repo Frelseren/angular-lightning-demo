@@ -1,0 +1,21 @@
+<apex:page standardStylesheets="false" sidebar="false" showHeader="false" 
+  applyBodyTag="false" applyHtmlTag="false" docType="html-5.0"
+  controller="DASubmissionController">
+  <html>
+    <head>
+      <meta charset="utf-8" />
+      <title>Meetup</title>
+
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="icon" type="image/x-icon" href="{!$Resource.AngularPOC + '/favicon.ico'}" />
+      <link rel="stylesheet" type="text/css" href="{!$Resource.AngularPOC +  '/assets/main.css'}" />
+    </head>
+    <body>
+      <app-root>Loading...</app-root>
+      <script src="{!$Resource.AngularPOC + '/inline.bundle.js'}"></script>
+      <script src="{!$Resource.AngularPOC + '/polyfills.bundle.js'}"></script>
+      <script src="{!$Resource.AngularPOC + '/vendor.bundle.js'}"></script>
+      <script src="{!$Resource.AngularPOC + '/main.bundle.js'}"></script>
+    </body>
+  </html>
+</apex:page>
