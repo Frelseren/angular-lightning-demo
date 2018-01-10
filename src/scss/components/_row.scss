@@ -1,0 +1,19 @@
+.row {
+  display: block;
+  padding: em(12);
+  border-top: 1px solid $blue;
+  font-size: .75rem;
+  line-height: 1.25;
+  color: #54698d;
+  text-transform: uppercase;
+  letter-spacing: 0.0625em;
+
+  &:nth-child(2n),
+  &:hover {
+    background-color: $grey-light;
+  }
+
+  &:last-of-type {
+    border-bottom: 1px solid $blue;
+  }
+}

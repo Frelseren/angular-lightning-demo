@@ -1,15 +1,25 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ContactsComponent } from 'app/contacts/contacts.component';
+import { ContactComponent } from 'app/contact/contact.component';
 
 const routes: Routes = [
   {
-    path: '',
-    children: []
+    path: 'contacts',
+    component: ContactsComponent
+  },
+  {
+    path: 'contact/:contactId',
+    component: ContactComponent
+  },
+  {
+    path: '**',
+    redirectTo: '/contacts'
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule],
   providers: []
 })
