@@ -29,10 +29,13 @@ export class ContactComponent implements OnInit {
 
   ngOnInit() {
     this.route$.subscribe(map => {
-      const contactId = map.get('contactId');
-      this.contact = sforce.apex.execute('AngularPOC', 'getContacts', {
-        contactId
-      });
+      try {
+        this.contact = JSON.parse(sforce.apex.execute('AngularPOC', 'getContact', {
+          contactId: map.get('contactId')
+        }));
+      } catch (e) {
+        console.error(e);
+      }
     });
   }
 

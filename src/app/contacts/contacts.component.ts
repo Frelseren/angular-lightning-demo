@@ -16,7 +16,11 @@ export class ContactsComponent implements OnInit {
   contacts: Contact[];
 
   ngOnInit() {
-    this.contacts = sforce.apex.execute('AngularPOC', 'getContacts', { });
+    try {
+      this.contacts = JSON.parse(sforce.apex.execute('AngularPOC', 'getContacts', { }));
+    } catch (e) {
+      console.error(e);
+    }
   }
 
 }
