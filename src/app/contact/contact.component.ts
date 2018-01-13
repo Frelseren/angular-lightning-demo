@@ -10,7 +10,7 @@ interface Contact {
   Email: string;
 }
 
-declare const Visualforce;
+declare const sforce;
 
 @Component({
   selector: 'app-contact',
@@ -29,18 +29,10 @@ export class ContactComponent implements OnInit {
 
   ngOnInit() {
     this.route$.subscribe(map => {
-      Visualforce.remoting.Manager.invokeAction(
-        'AngularPOC.getContact',
-        map.get('contactId'),
-        (result: Contact, event) => {
-          if (event.status) {
-            this.contact = result;
-          } else {
-            console.error(event.message);
-          }
-        },
-        { escape: false }
-      );
+      const contactId = map.get('contactId');
+      this.contact = sforce.apex.execute('AngularPOC', 'getContacts', {
+        contactId
+      });
     });
   }
 
