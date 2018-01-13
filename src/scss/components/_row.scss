@@ -1,5 +1,5 @@
 .row {
-  display: block;
+  display: flex;
   padding: em(12);
   border-top: 1px solid $blue;
   font-size: .75rem;
@@ -15,5 +15,10 @@
 
   &:last-of-type {
     border-bottom: 1px solid $blue;
+  }
+
+  &-value {
+    text-transform: none;
+    color: shade(#54698d, 10%);
   }
 }
