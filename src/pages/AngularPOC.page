@@ -1,6 +1,5 @@
 <apex:page standardStylesheets="false" sidebar="false" showHeader="false" 
-  applyBodyTag="false" applyHtmlTag="false" docType="html-5.0"
-  controller="AngularPOC">
+  applyBodyTag="false" applyHtmlTag="false" docType="html-5.0">
   <html>
     <head>
       <meta charset="utf-8" />
@@ -12,6 +11,11 @@
     </head>
     <body>
       <app-root>Loading...</app-root>
+      <script src="/soap/ajax/21.0/connection.js" />
+      <script src="/soap/ajax/21.0/apex.js" />
+      <script>
+        sforce.connection.sessionId = '{!$Api.Session_ID}';
+      </script>
       <script src="{!$Resource.AngularPOC + '/inline.bundle.js'}"></script>
       <script src="{!$Resource.AngularPOC + '/polyfills.bundle.js'}"></script>
       <script src="{!$Resource.AngularPOC + '/vendor.bundle.js'}"></script>

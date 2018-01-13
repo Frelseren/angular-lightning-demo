@@ -1,12 +1,12 @@
-public class AngularPOC {
+global class AngularPOC {
 
   @RemoteAction
-  public static List<Contact> getContacts() {
-    return [SELECT Id, Name FROM Contact];
+  webservice static String getContacts() {
+    return JSON.serialize([SELECT Id, Name FROM Contact]);
   }
 
   @RemoteAction
-  public static Contact getContact(String contactId) {
-    return [SELECT Id, Name FROM Contact WHERE Id =: contactId];
+  webservice static String getContact(String contactId) {
+    return JSON.serialize([SELECT Id, Name FROM Contact WHERE Id =: contactId]);
   }
 }
