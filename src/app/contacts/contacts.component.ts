@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-declare const sessionId;
+import { ApexService } from '../apex.service';
 
 interface Contact {
   Id: string;
@@ -17,14 +15,14 @@ export class ContactsComponent implements OnInit {
   contacts: Contact[];
 
   constructor(
-    private http: HttpClient
+    private apex: ApexService
   ) {}
 
   ngOnInit() {
-    const headers = new HttpHeaders({ 'Authorization': 'Bearer ' + sessionId });
-
-    this.http.get<Contact[]>('/services/apexrest/angularpoc', { headers })
-      .subscribe(contacts => this.contacts = contacts);
+    this.apex.get().subscribe(
+      contacts => this.contacts = contacts,
+      error => console.log(error)
+    );
   }
 
 }

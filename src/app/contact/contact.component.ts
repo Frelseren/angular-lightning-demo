@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { ApexService } from '../apex.service';
 
 interface Contact {
   Id: string;
@@ -9,8 +10,6 @@ interface Contact {
   Phone: string;
   Email: string;
 }
-
-declare const sforce;
 
 @Component({
   selector: 'app-contact',
@@ -22,20 +21,18 @@ export class ContactComponent implements OnInit {
   contact: Contact;
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private apex: ApexService
   ) {
     this.route$ = route.paramMap;
   }
 
   ngOnInit() {
     this.route$.subscribe(map => {
-      try {
-        this.contact = JSON.parse(sforce.apex.execute('AngularPOC', 'getContact', {
-          contactId: map.get('contactId')
-        }));
-      } catch (e) {
-        console.error(e);
-      }
+      this.apex.get(map.get('contactId')).subscribe(
+        contact => this.contact = contact[0],
+        error => console.log(error)
+      );
     });
   }
 
