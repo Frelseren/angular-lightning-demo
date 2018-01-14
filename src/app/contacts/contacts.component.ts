@@ -1,7 +1,5 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import * as LCC from 'lightning-container';
-
-declare const sforce;
+import { Component, OnInit } from '@angular/core';
+import { ApexService } from '../apex.service';
 
 interface Contact {
   Id: string;
@@ -17,23 +15,14 @@ export class ContactsComponent implements OnInit {
   contacts: Contact[];
 
   constructor(
-    private cd: ChangeDetectorRef
+    private apex: ApexService
   ) {}
 
   ngOnInit() {
-    sforce.connection.sessionId = LCC.getRESTAPISessionKey();
-
-    try {
-      this.contacts = JSON.parse(sforce.apex.execute('AngularPOC',
-        'getContacts', {}));
-      /**
-       * Angular cannot detect changes made by lightning container by itself,
-       * so we have to force the update manually.
-       */
-      this.cd.detectChanges();
-    } catch (e) {
-      console.error(e);
-    }
+    this.apex.get().subscribe(
+      contacts => this.contacts = contacts,
+      error => console.log(error)
+    );
   }
 
 }

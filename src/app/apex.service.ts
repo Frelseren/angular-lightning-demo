@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-
-declare const sessionId;
+import * as LCC from 'lightning-container';
 
 interface Contact {
   Id: string;
@@ -14,7 +13,7 @@ interface Contact {
 
 @Injectable()
 export class ApexService {
-  headers = new HttpHeaders({ 'Authorization': 'Bearer ' + sessionId });
+  headers = new HttpHeaders({ 'Authorization': 'Bearer ' + LCC.getRESTAPISessionKey() });
 
   constructor(
     private http: HttpClient
