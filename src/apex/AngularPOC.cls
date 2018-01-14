@@ -1,8 +1,9 @@
+@RestResource(urlMapping = '/angularpoc')
 global class AngularPOC {
 
-  @RemoteAction
-  webservice static String getContacts() {
-    return JSON.serialize([SELECT Id, Name FROM Contact]);
+  @HttpGet
+  global static List<Contact> getContacts() {
+    return [SELECT Id, Name FROM Contact];
   }
 
   @RemoteAction

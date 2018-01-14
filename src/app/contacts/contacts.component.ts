@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-declare const sforce;
+declare const sessionId;
 
 interface Contact {
   Id: string;
@@ -15,12 +16,15 @@ interface Contact {
 export class ContactsComponent implements OnInit {
   contacts: Contact[];
 
+  constructor(
+    private http: HttpClient
+  ) {}
+
   ngOnInit() {
-    try {
-      this.contacts = JSON.parse(sforce.apex.execute('AngularPOC', 'getContacts', { }));
-    } catch (e) {
-      console.error(e);
-    }
+    const headers = new HttpHeaders({ 'Authorization': 'Bearer ' + sessionId });
+
+    this.http.get<Contact[]>('/services/apexrest/angularpoc', { headers })
+      .subscribe(contacts => this.contacts = contacts);
   }
 
 }

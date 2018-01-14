@@ -11,10 +11,8 @@
     </head>
     <body>
       <app-root>Loading...</app-root>
-      <script src="/soap/ajax/21.0/connection.js" />
-      <script src="/soap/ajax/21.0/apex.js" />
       <script>
-        sforce.connection.sessionId = '{!$Api.Session_ID}';
+        var sessionId = '{!$Api.Session_ID}';
       </script>
       <script src="{!$Resource.AngularPOC + '/inline.bundle.js'}"></script>
       <script src="{!$Resource.AngularPOC + '/polyfills.bundle.js'}"></script>
