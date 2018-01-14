@@ -30,6 +30,8 @@ Run `git checkout step/3`.
 In order to communicate with Apex via Visualforce and REST Api you need to pass a session Id to Angular, e.g. by assigning a global variable `var sessionId = {!$Api.Session_Id}`.
 
 _Note 1_: There might be a CORS issue, then you'd have to allow the domain in `Salesforce > Settings > CORS > New`.
+
 _Note 2_: Salesforce 302 redirect automatically changes request method from `POST` to `GET`. In these cases `@HttpPost` won't work. That's why in example there is only a `@HttpGet` method.
+
 _Note 3_: You can have only one method of each type in the `@RestResource` controller.
 
