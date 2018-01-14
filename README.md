@@ -1,27 +1,35 @@
-# Meetup
+# Helsinki Salesforce Developer Group
+## React & Angular apps as Lightning Components
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-beta.32.3.
+Run `git checkout _branchname_` to navigate between alternative data communication options.
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng build` to build the Angular project. Archive files in the `dist/` directory and upload them to Salesforce as a static resource.
 
-## Code scaffolding
+Find all required files in the `src/` directory. Copy file contents from `src/aura/`, `src/apex/`, `src/pages/` to Salesforce whenever needed.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+When using Visualforce page, don't forget to check `Available for Lightning Experience, Lightning Communities, and the mobile app`;
 
-## Build
+## Step 1: Visualforce + Remote Actions
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Run `git checkout step/1`.
 
-## Running unit tests
+In order to communicate with Apex via Visualforce and Remote Action you need to reference a controller in `apex:page`.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Step 2: Visualforce + Webservice
 
-## Running end-to-end tests
+Run `git checkout step/2`.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+In order to communicate with Apex via Visualforce and Webservice you need to load `connection.js` and `apex.js` libraries and set the `sforce.connection.sessionId = {!$Api.Session_Id}`.
 
-## Further help
+_Note_: Web services are synchronous.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Step 3: Visualforce + REST Api
+
+Run `git checkout step/3`.
+
+In order to communicate with Apex via Visualforce and REST Api you need to pass a session Id to Angular, e.g. by assigning a global variable `var sessionId = {!$Api.Session_Id}`.
+
+_Note 1_: There might be a CORS issue, then you'd have to allow the domain in `Salesforce > Settings > CORS > New`.
+_Note 2_: Salesforce 302 redirect automatically changes request method from `POST` to `GET`. In these cases `@HttpPost` won't work. That's why in example there is only a `@HttpGet` method.
+_Note 3_: You can have only one method of each type in the `@RestResource` controller.
+
