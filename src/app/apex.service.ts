@@ -20,7 +20,7 @@ export class ApexService {
     private http: HttpClient
   ) { }
 
-  get(contactId: string = ''): Observable<Contact[]> {
+  get(contactId?: string): Observable<Contact[]> {
     const params = new HttpParams().set('contactId', contactId);
 
     return this.http.get<Contact[]>('/services/apexrest/angularpoc', {
