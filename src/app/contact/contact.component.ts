@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+
+declare const sforce;
 
 interface Contact {
   Id: string;
@@ -20,11 +22,19 @@ export class ContactComponent implements OnInit {
   contact: Contact;
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cd: ChangeDetectorRef
   ) {
     this.route$ = route.paramMap;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.route$.subscribe(map => {
+      this.contact = JSON.parse(sforce.apex.execute('AngularPOC', 'getContact', {
+        contactId: map.get('contactId')
+      }));
+      this.cd.detectChanges();
+    });
+  }
 
 }
