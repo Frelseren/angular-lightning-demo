@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { ApexService } from '../apex.service';
 
 interface Contact {
   Id: string;
@@ -21,19 +20,11 @@ export class ContactComponent implements OnInit {
   contact: Contact;
 
   constructor(
-    private route: ActivatedRoute,
-    private apex: ApexService
+    private route: ActivatedRoute
   ) {
     this.route$ = route.paramMap;
   }
 
-  ngOnInit() {
-    this.route$.subscribe(map => {
-      this.apex.get(map.get('contactId')).subscribe(
-        contact => this.contact = contact[0],
-        error => console.log(error)
-      );
-    });
-  }
+  ngOnInit() {}
 
 }

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ApexService } from '../apex.service';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import * as LCC from 'lightning-container';
 
 interface Contact {
   Id: string;
@@ -15,14 +15,27 @@ export class ContactsComponent implements OnInit {
   contacts: Contact[];
 
   constructor(
-    private apex: ApexService
+    private cd: ChangeDetectorRef
   ) {}
 
+  private onMessage(contacts: Contact[]) {
+    console.log(contacts);
+    this.contacts = contacts;
+    /**
+     * Angular cannot detect changes made by lightning container by itself,
+     * so we have to force the update manually.
+     */
+    this.cd.detectChanges();
+  }
+
   ngOnInit() {
-    this.apex.get().subscribe(
-      contacts => this.contacts = contacts,
-      error => console.log(error)
-    );
+    /**
+     * When lightning container emits a message event it refers to the wrong
+     * scope, so we have to manually bind `this` to the callback function.
+     */
+    LCC.addMessageHandler(this.onMessage.bind(this));
+    console.log(LCC.sendMessage);
+    LCC.sendMessage('getContacts');
   }
 
 }
