@@ -7,6 +7,6 @@ public class AngularPOC {
 
   @RemoteAction
   public static Contact getContact(String contactId) {
-    return [SELECT Id, Name FROM Contact WHERE Id =: contactId];
+    return [SELECT Id, Name, Title, Phone, Email FROM Contact WHERE Id =: contactId];
   }
 }
