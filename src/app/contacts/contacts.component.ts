@@ -19,7 +19,6 @@ export class ContactsComponent implements OnInit {
   ) {}
 
   private onMessage(contacts: Contact[]) {
-    console.log(contacts);
     this.contacts = contacts;
     /**
      * Angular cannot detect changes made by lightning container by itself,
@@ -34,7 +33,6 @@ export class ContactsComponent implements OnInit {
      * scope, so we have to manually bind `this` to the callback function.
      */
     LCC.addMessageHandler(this.onMessage.bind(this));
-    console.log(LCC.sendMessage);
     LCC.sendMessage('getContacts');
   }
 
