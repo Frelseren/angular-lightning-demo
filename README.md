@@ -58,3 +58,7 @@ Run `git checkout step/5`.
 ## Step 6: Lightning Container + REST Api
 
 Run `git checkout step/6`.
+
+## Links 
+
+[Native Angular components & directives for Lightning Design System](http://ng-lightning.github.io/ng-lightning/#/)
